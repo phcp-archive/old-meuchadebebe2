@@ -304,7 +304,7 @@ var PresenteView = Parse.View.extend({
 
     evt.save(null, {
       success: function(evento) {
-        new MomsView();
+        new PresenteView();
         self.undelegateEvents();
         delete self;
         alert("saved");
