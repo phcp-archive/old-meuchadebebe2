@@ -307,9 +307,9 @@ var PresenteView = Parse.View.extend({
       this.$("#todo-list").append(view.render().el);
   },
 
-  addAll: function(collection, filter) {
+  addAll: function(collection) {
       this.$("#todo-list").html("");
-      this.todos.each(this.addOne);
+      this.addOne(collection.each());
   },
 
   save: function() {
@@ -339,6 +339,8 @@ var PresenteView = Parse.View.extend({
   render: function(presentes) {
     this.$el.html(_.template($("#presente-template").html()));
     this.delegateEvents();
+
+    addAll(presentes);
 
     if(presentes && presentes.length > 0) {
       for(var i = 0; i < presentes.length; i++) {
