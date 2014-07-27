@@ -276,7 +276,7 @@ var PresenteView = Parse.View.extend({
       query.equalTo("usuario", Parse.User.current());
       query.find({
         success: function(results) {
-         var presentes = results[0].attributes;
+         var presentes = results;
           //var objectId = results[0].id;
           //self.render(meuEvento, objectId);
           self.render(presentes);
@@ -319,7 +319,7 @@ var PresenteView = Parse.View.extend({
 
     if(presentes) {
       for(var i = 0; i < presentes.length; i++) {
-        $("#div-lista-presentes").append( '<ul>' + presentes[i] + '</ul>' );
+        $("#div-lista-presentes").append( '<ul>' + presentes[i].attributes.nome + '</ul>' );
       }
     }
   }
