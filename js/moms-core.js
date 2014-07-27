@@ -310,7 +310,7 @@ var ListaPresentesView = Parse.View.extend({
       query.equalTo("usuario", Parse.User.current());
       query.find({
         success: function(results) {
-         var presentes = results.fetch();
+         var presentes = results;
           self.render(presentes);
         },
         error: function(error) {
