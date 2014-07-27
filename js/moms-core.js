@@ -2,8 +2,8 @@ $(function() {
   Parse.$ = jQuery;
 
   // Inicia a aplicacao do parse
-  Parse.initialize("8ERiNA4fFRBvD37pKmdhG6KcuZvtmCYHwZNN85uW",
-   "o53eGShke5E92usJ1tfS6uV2XJ61LdvLKkUCD7x2");
+  Parse.initialize("iD91Kruwny1uP1UNRCspAGNHSLHINUkEGuhe2N6E",
+   "jcCjFbysCwxymP6dfpBC4QE2ch75S3Y7xwevEvHo");
 
   // Model de Evento Cha de Bebe
   var Evento = Parse.Object.extend("Evento", {
