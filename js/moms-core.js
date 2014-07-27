@@ -38,7 +38,7 @@ $(function() {
 
   // Colecao de Presentes
   var ListaPresentes = Parse.Collection.extend({
-  	model: Presente,
+  	model: Presente
   });
 
   // Tela de Login
@@ -300,11 +300,23 @@ var ListaPresentesView = Parse.View.extend({
 
     var self = this;
 
-      this.presentesBanco = new ListaPresentes;
+      /*this.presentesBanco = new ListaPresentes;
       this.presentesBanco.query = new Parse.Query(Presente);
       this.presentesBanco.query.equalTo("usuario", Parse.User.current());
       this.presentesBanco.fetch();
-      self.render(this.presentesBanco);
+      self.render(this.presentesBanco);*/
+
+      var query = new Parse.Query(Presente);
+      query.equalTo("usuario", Parse.User.current());
+      query.find({
+        success: function(results) {
+         var presentes = results.fetch();
+          self.render(presentes);
+        },
+        error: function(error) {
+          this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
+        }
+      });
   },
 
   addOne: function(todo) {
