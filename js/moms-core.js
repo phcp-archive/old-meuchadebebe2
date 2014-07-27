@@ -302,6 +302,16 @@ var PresenteView = Parse.View.extend({
       });
   },
 
+  addOne: function(todo) {
+      var view = new ListaPresentesView({model: todo});
+      this.$("#todo-list").append(view.render().el);
+  },
+
+  addAll: function(collection, filter) {
+      this.$("#todo-list").html("");
+      this.todos.each(this.addOne);
+  },
+
   save: function() {
     var self = this;
 
