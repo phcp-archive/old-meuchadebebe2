@@ -300,17 +300,11 @@ var ListaPresentesView = Parse.View.extend({
 
     var self = this;
 
-      var query = new Parse.Query(Presente);
-      query.equalTo("usuario", Parse.User.current());
-      query.find({
-        success: function(results) {
-         var presentes = results.fetch();
-          self.render(presentes);
-        },
-        error: function(error) {
-          this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
-        }
-      });
+      this.presentesBanco = new ListaPresentes;
+      this.presentesBanco.query = new Parse.Query(Presente);
+      this.presentesBanco.equalTo("usuario", Parse.User.current());
+      this.presentesBanco.fetch();
+      self.render(this.presentesBanco);
   },
 
   addOne: function(todo) {
