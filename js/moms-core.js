@@ -291,6 +291,8 @@ var PresenteView = Parse.View.extend({
   },
 
   save: function() {
+    var self = this;
+
     var nomedopresente = this.$("#event-nomedopresente").val();
     var quantidade = this.$("#event-quantidadedopresente").val();
     var user = Parse.User.current();
