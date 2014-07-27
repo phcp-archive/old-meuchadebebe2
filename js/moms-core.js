@@ -267,7 +267,7 @@ var PresenteView = Parse.View.extend({
   template: _.template($('#item-presente-template').html()),
 
   events: {
-    "click .presente-delete"   : "clear"
+    "click .presente-delete"   : "clear",
     "dblclick label.presente-nome-content" : "edit",
     "keypress .edit"      : "updateOnEnter",
     "blur .edit"          : "close"
