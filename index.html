@@ -122,27 +122,33 @@
 
 	<script type="text/template" id="presente-template">
 	<h2>Lista de Presentes</h2>
-	<form class="presente-form form-control" role="form">
+	<form class="presente-form" role="form">
 		<input id="event-nomedopresente" class="form-control" placeholder="Presente" type="text" /><br/>
 		<input id="event-quantidadedopresente" class="form-control" placeholder="Quantidade" type="text" /><br/>
 		<button class="btn">Adicionar</button>
 		<div id="div-lista-presentes">
 		</div>
-		<ul id="todo-list">
-        </ul>
+		<table class="table" id="todo-list">
+        </table>
 		<div class="clear"></div>
 	</form>
 	</script>
 
 	<script type="text/template" id="item-presente-template">
-    <li>
+    <tr>
     	<div class="view">
+    		<td>
 	    	<label class="presente-nome-content"> <%= _.escape(nome) %></label>
+	    	</td>
+	    	<td>
 	    	<label class="presente-quantidade-content"> <%= _.escape(quantidade) %></label>
+	    	</td>
+	    	<td>
 			<button class="presente-delete"></button>
+			</td>
 		</div>
 		<input class="edit" value="<%= _.escape(content) %>">
-    </li>
+    </tr>
     </script>
 
 	<script type="text/template" id="invite-template">

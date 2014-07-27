@@ -79,20 +79,20 @@ p {
     display: none !important;
 }
 
-#todo-list li .edit {
+#todo-list tr .edit {
     display: none;
 }
 
-#todo-list li.editing .view {
+#todo-list tr.editing .view {
     display: none;
 }
 
-#todo-list li.editing {
+#todo-list tr.editing {
     border-bottom: none;
     padding: 0;
 }
 
-#todo-list li.editing .edit {
+#todo-list tr.editing .edit {
     display: block;
     width: 100px;
     padding: 13px 17px 12px 17px;

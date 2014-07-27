@@ -262,7 +262,7 @@ $(function() {
 
 var PresenteView = Parse.View.extend({
 
-  tagName:  "li",
+  tagName:  "tr",
 
   template: _.template($('#item-presente-template').html()),
 
