@@ -302,7 +302,7 @@ var ListaPresentesView = Parse.View.extend({
 
       this.presentesBanco = new ListaPresentes;
       this.presentesBanco.query = new Parse.Query(Presente);
-      this.presentesBanco.equalTo("usuario", Parse.User.current());
+      this.presentesBanco.query.equalTo("usuario", Parse.User.current());
       this.presentesBanco.fetch();
       self.render(this.presentesBanco);
   },
