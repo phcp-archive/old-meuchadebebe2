@@ -268,10 +268,13 @@ var PresenteView = Parse.View.extend({
 
   events: {
     "click .presente-delete"   : "clear"
+    "dblclick label.presente-nome-content" : "edit",
+    "keypress .edit"      : "updateOnEnter",
+    "blur .edit"          : "close"
   },
 
   initialize: function() {
-    _.bindAll(this, 'render', 'remove');
+    _.bindAll(this, 'render', 'close', 'remove');
     this.model.bind('destroy', this.remove);
   },
 
@@ -281,8 +284,22 @@ var PresenteView = Parse.View.extend({
     return this;
   },
 
+  edit: function() {
+      $(this.el).addClass("editing");
+      this.input.focus();
+  },
+
   clear: function() {
     this.model.destroy();
+  },
+
+  close: function() {
+      this.model.save({content: this.input.val()});
+      $(this.el).removeClass("editing");
+  },
+
+  updateOnEnter: function(e) {
+      if (e.keyCode == 13) this.close();
   }
   
 });
