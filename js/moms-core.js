@@ -279,6 +279,7 @@ var PresenteView = Parse.View.extend({
          var presentes = results[0].attributes;
           //var objectId = results[0].id;
           //self.render(meuEvento, objectId);
+          self.render(presentes);
         },
         error: function(error) {
           this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
@@ -286,7 +287,7 @@ var PresenteView = Parse.View.extend({
       });
 
 
-    this.render();
+    //this.render();
   },
 
   save: function() {
@@ -312,9 +313,15 @@ var PresenteView = Parse.View.extend({
     });
   },
 
-  render: function() {
+  render: function(presentes) {
     this.$el.html(_.template($("#presente-template").html()));
     this.delegateEvents();
+
+    if(presentes) {
+      for(var i = 0; i < presentes.length; i++) {
+        $("#div-lista-presentes").append( '<ul>' + presentes[i] + '</ul>' );
+      }
+    }
   }
 });
 
