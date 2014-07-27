@@ -357,11 +357,14 @@ var ListaPresentesView = Parse.View.extend({
     this.$el.html(_.template($("#presente-template").html()));
     this.delegateEvents();
 
-    this.addAll(presentes);
+    //this.addAll(presentes);
+    this.$("#todo-list").html("");
 
-    if(presentes && presentes.length > 0) {
+    if(presentes && presentes.length > 0){
       for(var i = 0; i < presentes.length; i++) {
-       // $("#div-lista-presentes").append( '<ul> <li>' + presentes[i].attributes.nome + '</li> <li>' + presentes[i].attributes.quantidade + '</li> </ul>' );
+        //collection.each(this.addOne);
+        this.addOne(presentes[i]);
+        //$("#div-lista-presentes").append( '<ul> <li>' + presentes[i].attributes.nome + '</li> <li>' + presentes[i].attributes.quantidade + '</li> </ul>' );
       }
     }
   }
