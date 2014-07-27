@@ -172,7 +172,7 @@ $(function() {
     },
 
     listaPresentes: function(e) {
-      new InviteView();
+      new PresenteView();
       this.undelegateEvents();
     },
 
