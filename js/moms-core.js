@@ -276,7 +276,7 @@ var PresenteView = Parse.View.extend({
       query.equalTo("user", Parse.User.current());
       query.find({
         success: function(results) {
-         // var meuEvento = results[0].attributes;
+         var presentes = results[0].attributes;
           //var objectId = results[0].id;
           //self.render(meuEvento, objectId);
         },
