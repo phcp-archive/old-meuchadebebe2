@@ -270,8 +270,8 @@ var PresenteView = Parse.View.extend({
     "click .presente-delete"   : "clear"
   },
 
-  clear: function() {
-    this.model.destroy();
+  initialize: function() {
+    _.bindAll(this, 'render');
   },
 
   render: function() {
@@ -279,6 +279,10 @@ var PresenteView = Parse.View.extend({
     //this.input = this.$('.edit');
     return this;
   },
+
+  clear: function() {
+    this.model.destroy();
+  }
   
 });
 
