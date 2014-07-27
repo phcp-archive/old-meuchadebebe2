@@ -270,6 +270,22 @@ var PresenteView = Parse.View.extend({
   initialize: function() {
     _.bindAll(this, "save");
 
+    var self = this;
+
+      var query = new Parse.Query(Presente);
+      query.equalTo("user", Parse.User.current());
+      query.find({
+        success: function(results) {
+         // var meuEvento = results[0].attributes;
+          //var objectId = results[0].id;
+          //self.render(meuEvento, objectId);
+        },
+        error: function(error) {
+          this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
+        }
+      });
+
+
     this.render();
   },
 
