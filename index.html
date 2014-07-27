@@ -128,9 +128,19 @@
 		<button class="btn">Adicionar</button>
 		<div id="div-lista-presentes">
 		</div>
+		<ul id="todo-list">
+        </ul>
 		<div class="clear"></div>
 	</form>
 	</script>
+
+	<script type="text/template" id="item-presente-template">
+    <li>
+    	<label> <%= _.escape(nome) %></label>
+    	<label> <%= _.escape(quantidade) %></label>
+		<button class="presente-delete"></button>
+    </li>
+    </script>
 
 	<script type="text/template" id="invite-template">
 	<h2>Convidar Amigos</h2>

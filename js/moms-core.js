@@ -260,6 +260,23 @@ $(function() {
     }
   });
 
+var ListaPresentesView = Parse.View.extend({
+
+  tagName:  "li",
+
+  template: _.template($('#item-presente-template').html()),
+
+  events: {
+    "click .presente-delete"   : "clear"
+  },
+
+  clear: function() {
+    this.model.destroy();
+  }
+
+});
+
+//Tela da lista de presentes
 var PresenteView = Parse.View.extend({
   events: {
     "submit form.presente-form": "save",
@@ -277,17 +294,12 @@ var PresenteView = Parse.View.extend({
       query.find({
         success: function(results) {
          var presentes = results;
-          //var objectId = results[0].id;
-          //self.render(meuEvento, objectId);
           self.render(presentes);
         },
         error: function(error) {
           this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
         }
       });
-
-
-    //this.render();
   },
 
   save: function() {
@@ -318,9 +330,9 @@ var PresenteView = Parse.View.extend({
     this.$el.html(_.template($("#presente-template").html()));
     this.delegateEvents();
 
-    if(presentes) {
+    if(results && results.length > 0) {
       for(var i = 0; i < presentes.length; i++) {
-        $("#div-lista-presentes").append( '<ul> <li>' + presentes[i].attributes.nome + '</li> <li>' + presentes[i].attributes.quantidade + '</li> </ul>' );
+       // $("#div-lista-presentes").append( '<ul> <li>' + presentes[i].attributes.nome + '</li> <li>' + presentes[i].attributes.quantidade + '</li> </ul>' );
       }
     }
   }
