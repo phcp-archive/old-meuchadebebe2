@@ -351,7 +351,7 @@ var ListaPresentesView = Parse.View.extend({
     this.$el.html(_.template($("#presente-template").html()));
     this.delegateEvents();
 
-    addAll(presentes);
+    this.addAll(presentes);
 
     if(presentes && presentes.length > 0) {
       for(var i = 0; i < presentes.length; i++) {
