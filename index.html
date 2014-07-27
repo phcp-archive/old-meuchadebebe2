@@ -21,7 +21,7 @@
 	<script>
 	window.fbAsyncInit = function() {
 		Parse.FacebookUtils.init({
-			appId      : '1462115917379234',
+			appId      : '586069791510336',
 			channelUrl : 'https://blmusic.com.br/tmp/MeuChaDeBebe', 
 			cookie     : true,
 			xfbml      : true 
@@ -116,6 +116,16 @@
 	    <label for="event-data">Quando irá ocorrer?</label>
 	    <input id="event-data" class="form-control" type="datetime-local" /><br/>
 		<button class="btn btn-primary">Salvar</button>
+		<div class="clear"></div>
+	</form>
+	</script>
+
+	<script type="text/template" id="presente-template">
+	<h2>Lista de Presentes</h2>
+	<form class="presente-form" role="form">
+		<input id="event-nomedopresente" class="form-control" placeholder="Presente" type="text" /><br/>
+		<input id="event-quantidadedopresente" class="form-control" placeholder="Quantidade" type="text" /><br/>
+		<button class="btn">Adicionar</button>
 		<div class="clear"></div>
 	</form>
 	</script>

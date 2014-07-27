@@ -19,7 +19,8 @@ $(function() {
   var Presente = Parse.Object.extend("Presente", {
   	defaults: {
   		nome: "",
-  		user: null
+      quantidade: 0,
+      usuario: Parse.User.current()
   	}
   });
 
@@ -145,6 +146,7 @@ $(function() {
     events: {
       "click #inicio": "principal",
       "click #editar-evento": "editarEvento",
+      "click #lista-presentes": "listaPresentes",
       "click #convidar": "convidar",
       "click #logout": "logOut",
     },
@@ -170,7 +172,8 @@ $(function() {
     },
 
     listaPresentes: function(e) {
-      new GiftsView();
+      new InviteView();
+      this.undelegateEvents();
     },
 
     logOut: function(e) {
@@ -256,6 +259,47 @@ $(function() {
       }
     }
   });
+
+var PresenteView = Parse.View.extend({
+  events: {
+    "submit form.presente-form": "save",
+  },
+
+  el: "#content",
+
+  initialize: function() {
+    _.bindAll(this, "save");
+
+    this.render();
+  },
+
+  save: function() {
+    var nomedopresente = this.$("#event-nomedopresente").val();
+    var quantidade = this.$("#event-quantidadedopresente").val();
+    var user = Parse.User.current();
+
+    var evt = new Presente();
+    evt.set("nome", nomedopresente);
+    evt.set("quantidade", parseInt(quantidade));
+    evt.set("usuario", user);  
+
+    evt.save(null, {
+      success: function(evento) {
+        new MomsView();
+        self.undelegateEvents();
+        delete self;
+      },
+      error: function(error) {
+        this.$("#error").html("Problemas ao salvar dados no servidor, aguarde e tente novamente.").show();
+      }
+    });
+  },
+
+  render: function() {
+    this.$el.html(_.template($("#presente-template").html()));
+    this.delegateEvents();
+  }
+});
 
   // Tela de convidar amigos
   var InviteView = Parse.View.extend({
