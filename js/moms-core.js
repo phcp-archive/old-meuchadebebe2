@@ -273,7 +273,7 @@ var PresenteView = Parse.View.extend({
     var self = this;
 
       var query = new Parse.Query(Presente);
-      query.equalTo("user", Parse.User.current());
+      query.equalTo("usuario", Parse.User.current());
       query.find({
         success: function(results) {
          var presentes = results[0].attributes;
