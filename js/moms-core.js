@@ -270,7 +270,28 @@ var PresenteView = Parse.View.extend({
   initialize: function() {
     _.bindAll(this, "save");
 
-    this.render();
+    var self = this;
+
+    var query = new Parse.Query(Presente);
+    query.equalTo("user", Parse.User.current());
+    query.find({
+      success: function(results) {
+        if(!results || results.length == 0) {
+          //new EventView();
+          //self.undelegateEvents();
+          //delete self;
+        }
+        else {
+          var meuEvento = results[0].attributes;
+          self.render(meuEvento);
+        }
+      },
+      error: function(error) {
+        this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
+      }
+    });
+
+    //this.render();
   },
 
   save: function() {
@@ -296,9 +317,15 @@ var PresenteView = Parse.View.extend({
     });
   },
 
-  render: function() {
+  render: function(presentes) {
     this.$el.html(_.template($("#presente-template").html()));
     this.delegateEvents();
+
+      if(!presentes || presentes.length == 0) {
+      }
+      else {
+        alert("tem presente!");
+      }
   }
 });
 
