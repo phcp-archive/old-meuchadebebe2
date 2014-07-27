@@ -136,9 +136,11 @@
 
 	<script type="text/template" id="item-presente-template">
     <li>
-    	<label class="presente-nome-content"> <%= _.escape(nome) %></label>
-    	<label class="presente-quantidade-content"> <%= _.escape(quantidade) %></label>
-		<button class="presente-delete"></button>
+    	<div class="view">
+	    	<label class="presente-nome-content"> <%= _.escape(nome) %></label>
+	    	<label class="presente-quantidade-content"> <%= _.escape(quantidade) %></label>
+			<button class="presente-delete"></button>
+		</div>
 		<input class="edit" value="<%= _.escape(content) %>">
     </li>
     </script>

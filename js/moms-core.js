@@ -280,7 +280,7 @@ var PresenteView = Parse.View.extend({
 
   render: function() {
     $(this.el).html(this.template(this.model.toJSON()));
-    //this.input = this.$('.edit');
+    this.input = this.$('.edit');
     return this;
   },
 
