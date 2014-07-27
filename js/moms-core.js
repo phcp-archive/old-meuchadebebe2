@@ -307,7 +307,6 @@ var PresenteView = Parse.View.extend({
         new PresenteView();
         self.undelegateEvents();
         delete self;
-        alert("saved");
       },
       error: function(error) {
         this.$("#error").html("Problemas ao salvar dados no servidor, aguarde e tente novamente.").show();
