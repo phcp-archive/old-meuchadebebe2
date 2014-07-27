@@ -319,7 +319,7 @@ var PresenteView = Parse.View.extend({
 
     if(presentes) {
       for(var i = 0; i < presentes.length; i++) {
-        $("#div-lista-presentes").append( '<ul>' + presentes[i].attributes.nome + '</ul>' );
+        $("#div-lista-presentes").append( '<ul> <li>' + presentes[i].attributes.nome + '</li> <li>' + presentes[i].attributes.quantidade + '</li> </ul>' );
       }
     }
   }
