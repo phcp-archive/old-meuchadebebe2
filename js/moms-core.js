@@ -172,7 +172,7 @@ $(function() {
     },
 
     listaPresentes: function(e) {
-      new PresenteView();
+      new ListaPresentesView();
       this.undelegateEvents();
     },
 
@@ -288,6 +288,7 @@ var PresenteView = Parse.View.extend({
 
 //Tela da lista de presentes
 var ListaPresentesView = Parse.View.extend({
+
   events: {
     "submit form.presente-form": "save",
   },
