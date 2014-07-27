@@ -320,7 +320,7 @@ var ListaPresentesView = Parse.View.extend({
   },
 
   addOne: function(todo) {
-      var view = new ListaPresentesView({model: todo});
+      var view = new PresenteView({model: todo});
       this.$("#todo-list").append(view.render().el);
   },
 
