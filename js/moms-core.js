@@ -296,7 +296,7 @@ var ListaPresentesView = Parse.View.extend({
   el: "#content",
 
   initialize: function() {
-    _.bindAll(this, "save");
+    _.bindAll(this, 'addOne', 'addAll', 'save');
 
     var self = this;
 
@@ -320,7 +320,7 @@ var ListaPresentesView = Parse.View.extend({
 
   addAll: function(collection) {
       this.$("#todo-list").html("");
-      this.addOne(collection.each());
+      collection.each(this.addOne);
   },
 
   save: function() {
