@@ -86,3 +86,15 @@ p {
 #todo-list li.editing .view {
     display: none;
 }
+
+#todo-list li.editing {
+    border-bottom: none;
+    padding: 0;
+}
+
+#todo-list li.editing .edit {
+    display: block;
+    width: 100px;
+    padding: 13px 17px 12px 17px;
+    margin: 0 0 0 43px;
+}
