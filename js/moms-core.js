@@ -260,7 +260,7 @@ $(function() {
     }
   });
 
-var ListaPresentesView = Parse.View.extend({
+var PresenteView = Parse.View.extend({
 
   tagName:  "li",
 
@@ -272,12 +272,18 @@ var ListaPresentesView = Parse.View.extend({
 
   clear: function() {
     this.model.destroy();
-  }
+  },
 
+  render: function() {
+    $(this.el).html(this.template(this.model.toJSON()));
+    //this.input = this.$('.edit');
+    return this;
+  },
+  
 });
 
 //Tela da lista de presentes
-var PresenteView = Parse.View.extend({
+var ListaPresentesView = Parse.View.extend({
   events: {
     "submit form.presente-form": "save",
   },
