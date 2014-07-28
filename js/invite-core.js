@@ -108,7 +108,6 @@ $(function() {
               new GiftsListView(convite.user);
             },
             error: function(error) {
-              console.log("error");
               innerSelf.$("#error").html("Problemas ao salvar dados no servidor, aguarde e tente novamente.").show();
             }
           });
@@ -190,6 +189,8 @@ $(function() {
       _.bindAll(this, 'addOne', 'addAll');
 
       var self = this;
+
+      console.log(user);
 
       var query = new Parse.Query(Presente);
       query.equalTo("usuario", user);
