@@ -84,7 +84,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>Chá de Bebê: <%= nomedobebe %></h2>
-				<p><%= descricao %></p>
+				<p><strong>Sobre o evento:</strong> <%= descricao %></p>
 				<p><strong>Data/Hora:</strong> <%= data %></p>
 			</div>
 		</div>
@@ -109,10 +109,10 @@
 
 	<script type="text/template" id="event-template">
 	<h2>Editar Chá de Bebê</h2>
-	<form class="event-form form-control" role="form">
+	<form class="event-form" role="form">
 		<input id="event-objectId" class="hidden" type="hidden" />
 	    <input id="event-nomedobebe" class="form-control" placeholder="Qual o nome do bebê?" type="text" /><br/>
-	    <textarea id="event-descricao" class="form-control" placeholder="Fale um pouco sobre o chá de bebê aqui." type="text" /><br/>
+	    <textarea id="event-descricao" class="form-control" placeholder="Como será a dinâmica? Precisará levar comidas/bebidas? Onde será o evento? Fale um pouco sobre o chá de bebê aqui." type="text" /><br/>
 	    <label for="event-data">Quando irá ocorrer?</label>
 	    <input id="event-data" class="form-control" type="datetime-local" /><br/>
 		<button class="btn btn-primary">Salvar</button>
@@ -151,7 +151,7 @@
 
 	<script type="text/template" id="invite-template">
 	<h2>Convidar Amigos</h2>
-	<form class="invite-form form-control" role="form">
+	<form class="invite-form" role="form">
 	    <input id="invite-message" class="form-control" placeholder="Qual a mensagem do convite?" type="text" maxlength="100" /><br/>
 		<button class="btn btn-primary">Escolher Amigos</button>
 		<div class="clear"></div>
