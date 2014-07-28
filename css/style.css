@@ -79,15 +79,8 @@ p {
     display: none !important;
 }
 
-#todo-list {
+.table {
     margin-top: 20px;
-    padding-left: 0px;
-}
-
-#todo-list li {
-    list-style-type: none;
-    background: #eee;
-    padding: 10px;
 }
 
 #todo-list tr .edit {
@@ -108,9 +101,4 @@ p {
     width: 100px;
     padding: 13px 17px 12px 17px;
     margin: 0 0 0 43px;
-}
-
-.presente-form {
-    height: auto !important;
-    padding: 13px 12px;
 }
