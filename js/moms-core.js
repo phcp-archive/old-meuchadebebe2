@@ -294,7 +294,9 @@ var PresenteView = Parse.View.extend({
   },
 
   close: function() {
-      this.model.save({nome: this.input.val()});
+    this.model.set("nome", this.input.val());
+    this.model.save();
+      //this.model.save({nome: this.input.val()});
       $(this.el).removeClass("editing");
   },
 
