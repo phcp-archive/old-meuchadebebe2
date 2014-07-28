@@ -166,7 +166,7 @@ $(function() {
     },
 
     initialize: function() {
-      _.bindAll(this, 'render', 'close', 'remove');
+      _.bindAll(this, 'render', 'ok');
       this.model.bind('change', this.render);
       this.model.bind('destroy', this.remove);
     },
@@ -178,7 +178,7 @@ $(function() {
     },
 
     ok: function() {
-      this.model.destroy();
+      this.model.save({quantidadeAtendida: this.model.attributes.quantidadeAtendida + 1});
     }
   });
 
