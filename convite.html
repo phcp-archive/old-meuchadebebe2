@@ -63,13 +63,34 @@
 	<script type="text/template" id="giftslist-template">
 	<div id="reject-screen">
 		<h1>Agora vamos aos Presentes! </h1>
-		<p>Escolha qual dos presentes da lista abaixo você vai levar e clique depois clique em enviar:</p>
-		<a href="index.html" class="btn btn-primary">Enviar</a>
+		<p>Escolha qual dos presentes da lista abaixo você vai levar.</p>
 	</div>
 	</script>
 
-	<script type="text/template" id="gift-template">
-
+	<script type="text/template" id="presente-template">
+	<h2>Lista de Presentes</h2>
+		<input id="event-nomedopresente" class="form-control" placeholder="Presente" type="text" /><br/>
+		<input id="event-quantidadedopresente" class="form-control" placeholder="Quantidade" type="text" /><br/>
+		<button class="btn">Adicionar</button>
+		<table class="table">
+		<thead></thead>
+		<tbody id="gifts-list"></tbody>
+        </table>
+		<div class="clear"></div>
+	</form>
 	</script>
+
+	<script type="text/template" id="item-presente-template">
+		<td class="view">
+		<button class="presente-ok btn btn-xs btn-success glyphicon glyphicon-ok"></button>
+		</td>
+		<td class="view">
+    	<label class="presente-nome-content"> <%= _.escape(nome) %></label>
+    	<input id="<%= _.escape(objectId) %>" class="edit" value="<%= _.escape(nome) %>"> </input>
+    	</td>
+    	<td class="view">
+    	<label class="presente-quantidade-content"> <%= _.escape(quantidade) %></label>
+    	</td>
+    </script>
 </body>
 </html>

@@ -353,11 +353,11 @@ var ListaPresentesView = Parse.View.extend({
 
   addOne: function(todo) {
       var view = new PresenteView({model: todo});
-      this.$("#todo-list").append(view.render().el);
+      this.$("#gifts-list").append(view.render().el);
   },
 
   addAll: function(collection) {
-      this.$("#todo-list").html("");
+      this.$("#gifts-list").html("");
       collection.each(this.addOne);
   },
 
@@ -393,7 +393,7 @@ var ListaPresentesView = Parse.View.extend({
     this.$el.html(_.template($("#presente-template").html()));
     this.delegateEvents();
 
-    this.$("#todo-list").html("");
+    this.$("#gifts-list").html("");
 
     if(presentes && presentes.length > 0){
       for(var i = 0; i < presentes.length; i++) {
