@@ -155,16 +155,80 @@ $(function() {
     }
   });
 
-  // Tela de presentes do convite
-  var GiftsListView = Parse.View.extend({
-    el: "#content",
+  //Tela de um item do presente
+  var GiftView = Parse.View.extend({
+    tagName:  "tr",
+
+    template: _.template($('#item-presente-template').html()),
+
+    events: {
+      "click .presente-ok"   : "ok",
+    },
 
     initialize: function() {
-      this.render();
+      _.bindAll(this, 'render', 'close', 'remove');
+      this.model.bind('change', this.render);
+      this.model.bind('destroy', this.remove);
     },
 
     render: function() {
-      this.$el.html(_.template($("#giftslist-template").html()));
+      $(this.el).html(this.template(this.model.toJSON()));
+      this.input = this.$('.edit');
+      return this;
+    },
+
+    ok: function() {
+      this.model.destroy();
+    }
+  });
+
+  //Tela da lista de presentes
+  var GiftsListView = Parse.View.extend({
+    events: {
+      "submit form.presente-form": "save",
+    },
+
+    el: "#content",
+
+    initialize: function() {
+      _.bindAll(this, 'addOne', 'addAll');
+
+      var self = this;
+
+      var query = new Parse.Query(Presente);
+      query.equalTo("usuario", Parse.User.current());
+      query.find({
+        success: function(results) {
+         var presentes = results;
+          self.render(presentes);
+        },
+        error: function(error) {
+          this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
+        }
+      });
+    },
+
+    addOne: function(todo) {
+        var view = new PresenteView({model: todo});
+        this.$("#gifts-list").append(view.render().el);
+    },
+
+    addAll: function(collection) {
+        this.$("#gifts-list").html("");
+        collection.each(this.addOne);
+    },
+
+    render: function(presentes) {
+      this.$el.html(_.template($("#presente-template").html()));
+      this.delegateEvents();
+
+      this.$("#gifts-list").html("");
+
+      if(presentes && presentes.length > 0){
+        for(var i = 0; i < presentes.length; i++) {
+          this.addOne(presentes[i]);
+        }
+      }
     }
   });
 

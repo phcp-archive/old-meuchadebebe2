@@ -277,7 +277,6 @@ $(function() {
   });
 
   var PresenteView = Parse.View.extend({
-
     tagName:  "tr",
 
     template: _.template($('#item-presente-template').html()),
@@ -318,12 +317,10 @@ $(function() {
     updateOnEnter: function(e) {
         if (e.keyCode == 13) this.close();
     }
-    
   });
 
   //Tela da lista de presentes
   var ListaPresentesView = Parse.View.extend({
-
     events: {
       "submit form.presente-form": "save",
     },
