@@ -83,11 +83,11 @@ p {
     margin-top: 20px;
 }
 
-#todo-list tr .edit {
+#todo-list tr td input.edit {
     display: none;
 }
 
-#todo-list tr.editing .view {
+#todo-list tr.editing td.view label{
     display: none;
 }
 
@@ -96,7 +96,7 @@ p {
     padding: 0;
 }
 
-#todo-list tr.editing .edit {
+#todo-list tr.editing input.edit {
     display: block;
     width: 100px;
     padding: 13px 17px 12px 17px;
