@@ -218,6 +218,35 @@ $(function() {
         collection.each(this.addOne);
     },
 
+    save: function() {
+      var self = this;
+
+      var nomedopresente = this.$("#event-nomedopresente").val();
+      var quantidade = this.$("#event-quantidadedopresente").val();
+      var user = Parse.User.current();
+      var custom_acl = new Parse.ACL();
+      custom_acl.setPublicReadAccess(true);
+      custom_acl.setPublicWriteAccess(true);
+
+      var evt = new Presente();
+      evt.set("nome", nomedopresente);
+      evt.set("quantidade", parseInt(quantidade));
+      evt.set("quantidadeAtendida", 0);
+      evt.set("usuario", user); 
+      evt.setACL(custom_acl);
+
+      evt.save(null, {
+        success: function(evento) {
+          new ListaPresentesView();
+          self.undelegateEvents();
+          delete self;
+        },
+        error: function(error) {
+          this.$("#error").html("Problemas ao salvar dados no servidor, aguarde e tente novamente.").show();
+        }
+      });
+    },
+
     render: function(presentes) {
       this.$el.html(_.template($("#presente-template").html()));
       this.delegateEvents();
