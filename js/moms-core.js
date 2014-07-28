@@ -351,11 +351,14 @@ var ListaPresentesView = Parse.View.extend({
     var nomedopresente = this.$("#event-nomedopresente").val();
     var quantidade = this.$("#event-quantidadedopresente").val();
     var user = Parse.User.current();
+    var custom_acl = new Parse.ACL();
+    custom_acl.setPublicReadAccess(true);
 
     var evt = new Presente();
     evt.set("nome", nomedopresente);
     evt.set("quantidade", parseInt(quantidade));
-    evt.set("usuario", user);  
+    evt.set("usuario", user); 
+    evt.setACL(custom_acl);
 
     evt.save(null, {
       success: function(evento) {
