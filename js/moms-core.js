@@ -105,15 +105,32 @@ $(function() {
       var query = new Parse.Query(Evento);
       query.equalTo("user", Parse.User.current());
       query.find({
-        success: function(results) {
-          if(!results || results.length == 0) {
+        success: function(evResults) {        
+          if(!evResults || evResults.length == 0) {
             new EventView();
             self.undelegateEvents();
             delete self;
           }
           else {
-            var meuEvento = results[0].attributes;
-            self.render(meuEvento);
+            var innerSelf = self;
+            var meuEvento = evResults[0].attributes;
+
+            var innerQuery = new Parse.Query(Convite);
+            innerQuery.equalTo("user", Parse.User.current());
+            innerQuery.find({
+              success: function(evResults) {
+                var aceitos = 0;
+
+                for (var i = evResults.length - 1; i >= 0; i--) {
+                  aceitos += evResults[i].attributes.aceitos;
+                };
+
+                innerSelf.render(meuEvento, aceitos);
+              },
+              error: function(error) {
+                this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
+              }
+            });
           }
         },
         error: function(error) {
@@ -122,7 +139,7 @@ $(function() {
       });
     },
 
-    render: function(meuEvento) {
+    render: function(meuEvento, aceitos) {
       var dataEvento = new Date(meuEvento.data);
       var dataAgora = new Date($.now());
       var diasCont = Math.floor((dataEvento - dataAgora) / (1000*60*60*24));
@@ -134,7 +151,7 @@ $(function() {
         descricao: meuEvento.descricao,
         data: dataStr,
         diasCont: diasCont,
-        convidadosCont: 15,
+        convidadosCont: aceitos,
         presentesCont: 20
       }));
       this.delegateEvents();
@@ -413,11 +430,13 @@ var ListaPresentesView = Parse.View.extend({
           function(response){
             var custom_acl = new Parse.ACL();
             custom_acl.setPublicReadAccess(true);
+            custom_acl.setPublicWriteAccess(true);
 
             var convite = new Convite();
             convite.set("mensagem", msg);
             convite.set("req_facebook", response.request);
             convite.set("convidados", response.to);
+            convite.set("aceitos", 0);
             convite.set("user", Parse.User.current());
             convite.setACL(custom_acl);
 
