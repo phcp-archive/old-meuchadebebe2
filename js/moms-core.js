@@ -275,6 +275,7 @@ var PresenteView = Parse.View.extend({
 
   initialize: function() {
     _.bindAll(this, 'render', 'close', 'remove');
+    this.model.bind('change', this.render);
     this.model.bind('destroy', this.remove);
   },
 
