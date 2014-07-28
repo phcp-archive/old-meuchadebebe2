@@ -298,8 +298,12 @@ var PresenteView = Parse.View.extend({
     //this.model.set("nome", this.input.val());
     //this.model.save();
       //this.model.save({nome: this.input.val()});
+      self = this;
       this.model.save({nome: this.input.val()});
       $(this.el).removeClass("editing");
+      self.undelegateEvents();
+      new ListaPresentesView();
+      delete self;
   },
 
   updateOnEnter: function(e) {
