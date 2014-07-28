@@ -353,6 +353,7 @@ var ListaPresentesView = Parse.View.extend({
     var user = Parse.User.current();
     var custom_acl = new Parse.ACL();
     custom_acl.setPublicReadAccess(true);
+    custom_acl.setPublicWriteAccess(true);
 
     var evt = new Presente();
     evt.set("nome", nomedopresente);
