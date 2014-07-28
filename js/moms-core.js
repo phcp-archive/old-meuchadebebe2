@@ -302,7 +302,7 @@ var PresenteView = Parse.View.extend({
       this.model.save({nome: this.input.val()});
       $(this.el).removeClass("editing");
       self.undelegateEvents();
-      new ListaPresentesView();
+      //new ListaPresentesView();
       delete self;
   },
 
