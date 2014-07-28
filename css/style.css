@@ -75,7 +75,7 @@ p {
     font-weight: normal;
 }
 
-#invite-screen, #invite-screen p, #reject-screen, #reject-screen p,  #escolha-presentes, #escolha-presentes p {
+#invite-screen, #invite-screen p, #reject-screen, #reject-screen p,  #escolha-presentes h1, #escolha-presentes p {
     text-align: center;
 }
 
