@@ -227,7 +227,7 @@ $(function() {
       query.equalTo("user", Parse.User.current());
       query.find({
         success: function(results) {
-          if(!evResults || evResults.length == 0) {
+          if(!results || results.length == 0) {
             self.render(null, null);
           }
           else {
