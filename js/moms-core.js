@@ -294,7 +294,7 @@ var PresenteView = Parse.View.extend({
   },
 
   close: function() {
-    this.model.id = this.input.id;
+    this.model.id = this.input.attr('id');
     this.model.set("nome", this.input.val());
     this.model.save();
       //this.model.save({nome: this.input.val()});
