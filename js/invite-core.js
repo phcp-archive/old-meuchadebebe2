@@ -106,7 +106,7 @@ $(function() {
           convite.save(null, {
             success: function(conviteResp) {
               new GiftsListView(convite.user);
-              console.log(convite.user);
+              console.log(convite);
             },
             error: function(error) {
               innerSelf.$("#error").html("Problemas ao salvar dados no servidor, aguarde e tente novamente.").show();
