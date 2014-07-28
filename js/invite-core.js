@@ -195,7 +195,8 @@ $(function() {
       query.equalTo("usuario", user);
       query.find({
         success: function(results) {
-         var presentes = results;
+          var presentes = results;
+          console.log(presentes);
           self.render(presentes);
         },
         error: function(error) {
