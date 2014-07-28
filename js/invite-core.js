@@ -105,7 +105,7 @@ $(function() {
           convite.set("aceitos", convite.attributes.aceitos + 1);
           convite.save(null, {
             success: function(conviteResp) {
-              new GiftsListView();
+              new GiftsListView(convite.user);
             },
             error: function(error) {
               console.log("error");
@@ -186,13 +186,13 @@ $(function() {
   var GiftsListView = Parse.View.extend({
     el: "#content",
 
-    initialize: function() {
+    initialize: function(user) {
       _.bindAll(this, 'addOne', 'addAll');
 
       var self = this;
 
       var query = new Parse.Query(Presente);
-      query.equalTo("usuario", Parse.User.current());
+      query.equalTo("usuario", user);
       query.find({
         success: function(results) {
          var presentes = results;
