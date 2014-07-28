@@ -374,6 +374,7 @@ var ListaPresentesView = Parse.View.extend({
     var evt = new Presente();
     evt.set("nome", nomedopresente);
     evt.set("quantidade", parseInt(quantidade));
+    evt.set("quantidadeAtendida", 0);
     evt.set("usuario", user); 
     evt.setACL(custom_acl);
 

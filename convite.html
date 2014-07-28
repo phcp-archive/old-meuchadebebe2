@@ -69,28 +69,31 @@
 
 	<script type="text/template" id="presente-template">
 	<h2>Lista de Presentes</h2>
-		<input id="event-nomedopresente" class="form-control" placeholder="Presente" type="text" /><br/>
-		<input id="event-quantidadedopresente" class="form-control" placeholder="Quantidade" type="text" /><br/>
-		<button class="btn">Adicionar</button>
-		<table class="table">
-		<thead></thead>
-		<tbody id="gifts-list"></tbody>
-        </table>
-		<div class="clear"></div>
-	</form>
+	<table class="table">
+	<thead>
+		<th>Presentear</th>
+		<th>Presente</th>
+		<th>Quantidade</th>
+		<th>Quantidade Atendida</th>
+	</thead>
+	<tbody id="gifts-list"></tbody>
+    </table>
+	<div class="clear"></div>
 	</script>
 
 	<script type="text/template" id="item-presente-template">
-		<td class="view">
+	<td class="view">
 		<button class="presente-ok btn btn-xs btn-success glyphicon glyphicon-ok"></button>
-		</td>
-		<td class="view">
-    	<label class="presente-nome-content"> <%= _.escape(nome) %></label>
-    	<input id="<%= _.escape(objectId) %>" class="edit" value="<%= _.escape(nome) %>"> </input>
-    	</td>
-    	<td class="view">
-    	<label class="presente-quantidade-content"> <%= _.escape(quantidade) %></label>
-    	</td>
+	</td>
+	<td class="view">
+		<label class="presente-nome-content"> <%= _.escape(nome) %></label>
+	</td>
+	<td class="view">
+		<label class="presente-quantidade-content"> <%= _.escape(quantidade) %></label>
+	</td>
+	<td class="view">
+		<label class="presente-quantidade-atendida-content"> <%= _.escape(quantidadeAtendida) %></label>
+	</td>
     </script>
 </body>
 </html>
