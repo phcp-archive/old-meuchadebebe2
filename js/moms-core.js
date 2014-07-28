@@ -319,6 +319,9 @@ var ListaPresentesView = Parse.View.extend({
   initialize: function() {
     _.bindAll(this, 'addOne', 'addAll', 'save');
 
+    $("#menu li.active").removeClass("active");
+    $("#menu #lista-presentes").parent().toggleClass("active");
+
     var self = this;
 
     var query = new Parse.Query(Presente);
