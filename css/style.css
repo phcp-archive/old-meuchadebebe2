@@ -89,6 +89,7 @@ p {
 
 #gifts-list tr td input.edit {
     display: none;
+    height: 25px;
 }
 
 #gifts-list tr.editing td.view label{
