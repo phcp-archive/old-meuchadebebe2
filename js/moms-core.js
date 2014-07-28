@@ -276,133 +276,133 @@ $(function() {
     }
   });
 
-var PresenteView = Parse.View.extend({
+  var PresenteView = Parse.View.extend({
 
-  tagName:  "tr",
+    tagName:  "tr",
 
-  template: _.template($('#item-presente-template').html()),
+    template: _.template($('#item-presente-template').html()),
 
-  events: {
-    "click .presente-delete"   : "clear",
-    "dblclick label.presente-nome-content" : "edit",
-    "keypress .edit"      : "updateOnEnter",
-    "blur .edit"          : "close"
-  },
+    events: {
+      "click .presente-delete"   : "clear",
+      "dblclick label.presente-nome-content" : "edit",
+      "keypress .edit"      : "updateOnEnter",
+      "blur .edit"          : "close"
+    },
 
-  initialize: function() {
-    _.bindAll(this, 'render', 'close', 'remove');
-    this.model.bind('change', this.render);
-    this.model.bind('destroy', this.remove);
-  },
+    initialize: function() {
+      _.bindAll(this, 'render', 'close', 'remove');
+      this.model.bind('change', this.render);
+      this.model.bind('destroy', this.remove);
+    },
 
-  render: function() {
-    $(this.el).html(this.template(this.model.toJSON()));
-    this.input = this.$('.edit');
-    return this;
-  },
+    render: function() {
+      $(this.el).html(this.template(this.model.toJSON()));
+      this.input = this.$('.edit');
+      return this;
+    },
 
-  edit: function() {
-      $(this.el).addClass("editing");
-      this.input.focus();
-  },
+    edit: function() {
+        $(this.el).addClass("editing");
+        this.input.focus();
+    },
 
-  clear: function() {
-    this.model.destroy();
-  },
+    clear: function() {
+      this.model.destroy();
+    },
 
-  close: function() {
-    this.model.save({nome: this.input.val()});
-    $(this.el).removeClass("editing");
-  },
+    close: function() {
+      this.model.save({nome: this.input.val()});
+      $(this.el).removeClass("editing");
+    },
 
-  updateOnEnter: function(e) {
-      if (e.keyCode == 13) this.close();
-  }
-  
-});
+    updateOnEnter: function(e) {
+        if (e.keyCode == 13) this.close();
+    }
+    
+  });
 
-//Tela da lista de presentes
-var ListaPresentesView = Parse.View.extend({
+  //Tela da lista de presentes
+  var ListaPresentesView = Parse.View.extend({
 
-  events: {
-    "submit form.presente-form": "save",
-  },
+    events: {
+      "submit form.presente-form": "save",
+    },
 
-  el: "#content",
+    el: "#content",
 
-  initialize: function() {
-    _.bindAll(this, 'addOne', 'addAll', 'save');
+    initialize: function() {
+      _.bindAll(this, 'addOne', 'addAll', 'save');
 
-    $("#menu li.active").removeClass("active");
-    $("#menu #lista-presentes").parent().toggleClass("active");
+      $("#menu li.active").removeClass("active");
+      $("#menu #lista-presentes").parent().toggleClass("active");
 
-    var self = this;
+      var self = this;
 
-    var query = new Parse.Query(Presente);
-    query.equalTo("usuario", Parse.User.current());
-    query.find({
-      success: function(results) {
-       var presentes = results;
-        self.render(presentes);
-      },
-      error: function(error) {
-        this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
-      }
-    });
-  },
+      var query = new Parse.Query(Presente);
+      query.equalTo("usuario", Parse.User.current());
+      query.find({
+        success: function(results) {
+         var presentes = results;
+          self.render(presentes);
+        },
+        error: function(error) {
+          this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
+        }
+      });
+    },
 
-  addOne: function(todo) {
-      var view = new PresenteView({model: todo});
-      this.$("#gifts-list").append(view.render().el);
-  },
+    addOne: function(todo) {
+        var view = new PresenteView({model: todo});
+        this.$("#gifts-list").append(view.render().el);
+    },
 
-  addAll: function(collection) {
+    addAll: function(collection) {
+        this.$("#gifts-list").html("");
+        collection.each(this.addOne);
+    },
+
+    save: function() {
+      var self = this;
+
+      var nomedopresente = this.$("#event-nomedopresente").val();
+      var quantidade = this.$("#event-quantidadedopresente").val();
+      var user = Parse.User.current();
+      var custom_acl = new Parse.ACL();
+      custom_acl.setPublicReadAccess(true);
+      custom_acl.setPublicWriteAccess(true);
+
+      var evt = new Presente();
+      evt.set("nome", nomedopresente);
+      evt.set("quantidade", parseInt(quantidade));
+      evt.set("quantidadeAtendida", 0);
+      evt.set("usuario", user); 
+      evt.setACL(custom_acl);
+
+      evt.save(null, {
+        success: function(evento) {
+          new ListaPresentesView();
+          self.undelegateEvents();
+          delete self;
+        },
+        error: function(error) {
+          this.$("#error").html("Problemas ao salvar dados no servidor, aguarde e tente novamente.").show();
+        }
+      });
+    },
+
+    render: function(presentes) {
+      this.$el.html(_.template($("#presente-template").html()));
+      this.delegateEvents();
+
       this.$("#gifts-list").html("");
-      collection.each(this.addOne);
-  },
 
-  save: function() {
-    var self = this;
-
-    var nomedopresente = this.$("#event-nomedopresente").val();
-    var quantidade = this.$("#event-quantidadedopresente").val();
-    var user = Parse.User.current();
-    var custom_acl = new Parse.ACL();
-    custom_acl.setPublicReadAccess(true);
-    custom_acl.setPublicWriteAccess(true);
-
-    var evt = new Presente();
-    evt.set("nome", nomedopresente);
-    evt.set("quantidade", parseInt(quantidade));
-    evt.set("quantidadeAtendida", 0);
-    evt.set("usuario", user); 
-    evt.setACL(custom_acl);
-
-    evt.save(null, {
-      success: function(evento) {
-        new ListaPresentesView();
-        self.undelegateEvents();
-        delete self;
-      },
-      error: function(error) {
-        this.$("#error").html("Problemas ao salvar dados no servidor, aguarde e tente novamente.").show();
-      }
-    });
-  },
-
-  render: function(presentes) {
-    this.$el.html(_.template($("#presente-template").html()));
-    this.delegateEvents();
-
-    this.$("#gifts-list").html("");
-
-    if(presentes && presentes.length > 0){
-      for(var i = 0; i < presentes.length; i++) {
-        this.addOne(presentes[i]);
+      if(presentes && presentes.length > 0){
+        for(var i = 0; i < presentes.length; i++) {
+          this.addOne(presentes[i]);
+        }
       }
     }
-  }
-});
+  });
 
   // Tela de convidar amigos
   var InviteView = Parse.View.extend({
