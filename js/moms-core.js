@@ -227,9 +227,14 @@ $(function() {
       query.equalTo("user", Parse.User.current());
       query.find({
         success: function(results) {
-          var meuEvento = results[0].attributes;
-          var objectId = results[0].id;
-          self.render(meuEvento, objectId);
+          if(!evResults || evResults.length == 0) {
+            self.render(null, null);
+          }
+          else {
+            var meuEvento = results[0].attributes;
+            var objectId = results[0].id;
+            self.render(meuEvento, objectId);
+          }
         },
         error: function(error) {
           this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
