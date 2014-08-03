@@ -125,7 +125,24 @@ $(function() {
                   aceitos += evResults[i].attributes.aceitos;
                 };
 
-                innerSelf.render(meuEvento, aceitos);
+                var innerSelf2 = innerSelf;
+
+                var innerSelf2 = new Parse.Query(Presente);
+                innerSelf2.equalTo("user", Parse.User.current());
+                innerSelf2.find({
+                  success: function(prResults) {
+                    var presentes = 0;
+
+                    for (var i = prResults.length - 1; i >= 0; i--) {
+                      presentes += prResults[i].attributes.quantidadeAtendida;
+                    };
+
+                    innerSelf2.render(meuEvento, aceitos, presentes);
+                  },
+                  error: function(error) {
+                    this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
+                  }
+                });
               },
               error: function(error) {
                 this.$("#error").html("Problemas ao requisitar dados do servidor, aguarde e tente novamente.").show();
@@ -139,7 +156,7 @@ $(function() {
       });
     },
 
-    render: function(meuEvento, aceitos) {
+    render: function(meuEvento, aceitos, presentes) {
       var dataEvento = new Date(meuEvento.data);
       var dataAgora = new Date($.now());
       var diasCont = Math.floor((dataEvento - dataAgora) / (1000*60*60*24));
@@ -152,7 +169,7 @@ $(function() {
         data: dataStr,
         diasCont: diasCont,
         convidadosCont: aceitos,
-        presentesCont: 20
+        presentesCont: presentes
       }));
       this.delegateEvents();
     }
