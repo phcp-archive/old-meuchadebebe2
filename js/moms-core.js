@@ -119,19 +119,19 @@ $(function() {
             innerQuery.equalTo("user", Parse.User.current());
             innerQuery.find({
               success: function(evResults) {
+                var innerSelf2 = innerSelf;
                 var aceitos = 0;
 
                 for (var i = evResults.length - 1; i >= 0; i--) {
                   aceitos += evResults[i].attributes.aceitos;
                 };
 
-                var innerSelf2 = innerSelf;
-
                 var innerQuery2 = new Parse.Query(Presente);
                 innerQuery2.equalTo("user", Parse.User.current());
                 innerQuery2.find({
                   success: function(prResults) {
                     var presentes = 0;
+                    console.log(prResults);
 
                     for (var i = prResults.length - 1; i >= 0; i--) {
                       presentes += prResults[i].attributes.quantidadeAtendida;
