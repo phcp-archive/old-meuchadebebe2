@@ -68,7 +68,6 @@ $(function() {
 
                 self.$(".login-form button").attr("disabled", "disabled");
                 self.$el.html("");
-                new MenuView();
                 new MomsView();
                 self.undelegateEvents();
                 delete self;
