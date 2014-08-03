@@ -127,9 +127,9 @@ $(function() {
 
                 var innerSelf2 = innerSelf;
 
-                var innerSelf2 = new Parse.Query(Presente);
-                innerSelf2.equalTo("user", Parse.User.current());
-                innerSelf2.find({
+                var innerQuery2 = new Parse.Query(Presente);
+                innerQuery2.equalTo("user", Parse.User.current());
+                innerQuery2.find({
                   success: function(prResults) {
                     var presentes = 0;
 
