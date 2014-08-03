@@ -68,6 +68,7 @@ $(function() {
 
                 self.$(".login-form button").attr("disabled", "disabled");
                 self.$el.html("");
+                new MenuView();
                 new MomsView();
                 self.undelegateEvents();
                 delete self;
@@ -127,15 +128,13 @@ $(function() {
                 };
 
                 var innerQuery2 = new Parse.Query(Presente);
-                innerQuery2.equalTo("user", Parse.User.current());
+                innerQuery2.equalTo("usuario", Parse.User.current());
                 innerQuery2.find({
                   success: function(prResults) {
                     var presentes = 0;
-                    console.log(prResults);
 
                     for (var i = prResults.length - 1; i >= 0; i--) {
                       presentes += prResults[i].attributes.quantidadeAtendida;
-                      console.log(prResults[i].attributes);
                     };
 
                     innerSelf2.render(meuEvento, aceitos, presentes);
