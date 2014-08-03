@@ -135,6 +135,7 @@ $(function() {
 
                     for (var i = prResults.length - 1; i >= 0; i--) {
                       presentes += prResults[i].attributes.quantidadeAtendida;
+                      console.log(prResults[i].attributes);
                     };
 
                     innerSelf2.render(meuEvento, aceitos, presentes);
